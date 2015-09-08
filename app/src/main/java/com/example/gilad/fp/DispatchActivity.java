@@ -89,12 +89,11 @@ public class DispatchActivity extends AppCompatActivity {
                             intent = new Intent(this, StoryActivity.class);
                         }
                     } else {
-                        //TODO: change to pin
                         if (stage != 1) {
-                            intent = new Intent(this, ListActivity.class);
+                            intent = new Intent(this, PinActivity.class);
                         } else {
                             //TODO: change to tutorial intent.
-                            intent = new Intent(this, ListActivity.class);
+                            intent = new Intent(this, PinActivity.class);
                         }
                     }
                     break;
@@ -110,10 +109,10 @@ public class DispatchActivity extends AppCompatActivity {
                     //TODO: change to pin.
                     else {
                         if (stage != 1) {
-                            intent = new Intent(this, ListActivity.class);
+                            intent = new Intent(this, PinActivity.class);
                         } else {
                             //TODO: change to tutorial intent.
-                            intent = new Intent(this, ListActivity.class);
+                            intent = new Intent(this, PinActivity.class);
                         }
                     }
                     break;
@@ -128,10 +127,10 @@ public class DispatchActivity extends AppCompatActivity {
                     } else {
                         //TODO: change to pattern
                         if (stage != 1) {
-                            intent = new Intent(this, ListActivity.class);
+                            intent = new Intent(this, PatternActivity.class);
                         } else {
                             //TODO: change to tutorial intent.
-                            intent = new Intent(this, ListActivity.class);
+                            intent = new Intent(this, PatternActivity.class);
                         }
                     }
                     break;
@@ -146,10 +145,10 @@ public class DispatchActivity extends AppCompatActivity {
                     } else {
                         //TODO: change to pattern
                         if (stage != 1) {
-                            intent = new Intent(this, ListActivity.class);
+                            intent = new Intent(this, PatternActivity.class);
                         } else {
                             //TODO: change to tutorial intent.
-                            intent = new Intent(this, ListActivity.class);
+                            intent = new Intent(this, PatternActivity.class);
                         }
                     }
                     break;
@@ -164,10 +163,10 @@ public class DispatchActivity extends AppCompatActivity {
                     } else {
                         //TODO: change to pin
                         if (stage != 1) {
-                            intent = new Intent(this, StoryActivity.class);
+                            intent = new Intent(this, PinActivity.class);
                         } else {
                             //TODO: change to tutorial intent.
-                            intent = new Intent(this, StoryActivity.class);
+                            intent = new Intent(this, PinActivity.class);
                         }
                     }
                     break;
@@ -182,10 +181,10 @@ public class DispatchActivity extends AppCompatActivity {
                     } else {
                         //TODO: change to pin
                         if (stage != 1) {
-                            intent = new Intent(this, StoryActivity.class);
+                            intent = new Intent(this, PinActivity.class);
                         } else {
                             //TODO: change to tutorial intent.
-                            intent = new Intent(this, StoryActivity.class);
+                            intent = new Intent(this, PinActivity.class);
                         }
                     }
                     break;
@@ -200,10 +199,10 @@ public class DispatchActivity extends AppCompatActivity {
                     } else {
                         //TODO: change to pattern
                         if (stage != 1) {
-                            intent = new Intent(this, StoryActivity.class);
+                            intent = new Intent(this, PatternActivity.class);
                         } else {
                             //TODO: change to tutorial intent.
-                            intent = new Intent(this, StoryActivity.class);
+                            intent = new Intent(this, PatternActivity.class);
                         }
                     }
                     break;
@@ -218,10 +217,10 @@ public class DispatchActivity extends AppCompatActivity {
                     } else {
                         //TODO: change to pattern
                         if (stage != 1) {
-                            intent = new Intent(this, StoryActivity.class);
+                            intent = new Intent(this, PatternActivity.class);
                         } else {
                             //TODO: change to tutorial intent.
-                            intent = new Intent(this, StoryActivity.class);
+                            intent = new Intent(this, PatternActivity.class);
                         }
                     }
                     break;

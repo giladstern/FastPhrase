@@ -33,9 +33,6 @@
             android:label="@string/title_activity_pass_generate"
             android:screenOrientation="portrait" >
         </activity>
-        <activity android:name=".DetailsActivity" />
-        <activity android:name=".PlaybackOverlayActivity" />
-        <activity android:name=".BrowseErrorActivity" />
         <activity
             android:name=".SuccMsg"
             android:label="@string/title_activity_succ_msg"
@@ -54,6 +51,14 @@
         <activity
             android:name=".DispatchActivity"
             android:label="@string/title_activity_dispatch" >
+        </activity>
+        <activity
+            android:name=".PatternActivity"
+            android:label="@string/title_activity_pattern" >
+        </activity>
+        <activity
+            android:name=".PinActivity"
+            android:label="@string/title_activity_pin" >
         </activity>
     </application>
 

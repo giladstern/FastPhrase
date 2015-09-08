@@ -13,7 +13,7 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity {
 
     public enum Types{
-        LIST, DOUBLE_STORY, TRIPLE_STORY
+        LIST, TRIPLE_STORY, PATTERN, PIN
     }
     private Types type;
 

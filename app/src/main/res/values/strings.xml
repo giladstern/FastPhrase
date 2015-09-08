@@ -126,4 +126,6 @@
     <string name="title_activity_story">Fast Phrase</string>
     <string name="title_activity_list">Fast Phrase</string>
     <string name="title_activity_dispatch">Fast Phrase</string>
+    <string name="title_activity_pattern">PatternActivity</string>
+    <string name="title_activity_pin">PinActivity</string>
 </resources>

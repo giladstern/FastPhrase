@@ -1,6 +1,7 @@
 package com.example.gilad.fp;
 
 import android.app.ActionBar;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Color;
@@ -14,6 +15,11 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 
 public class PassGenerate extends AppCompatActivity {
@@ -85,6 +91,59 @@ public class PassGenerate extends AppCompatActivity {
                     labels[3] = res.getStringArray(R.array.amounts_text)[indices[3]];
                     labels[4] = res.getStringArray(R.array.animals_text)[indices[4]];
                     labels[5] = res.getStringArray(R.array.food_text)[indices[5]];
+                    break;
+                case PIN:
+                    for (int i = 0; i < 4 ; i++)
+                    {
+                        int digit = (int) (Math.random() * 10);
+                        password[i] = Integer.valueOf(digit).toString();
+                        labels[i] = "";
+                    }
+                    for (int i = 5; i < 7 ; i++)
+                    {
+                        password[i] = "";
+                        labels[i] = "";
+                    }
+                    break;
+                case PATTERN:
+                    List<Integer> possible = new ArrayList<>();
+                    List<Integer> code = new ArrayList<>();
+
+                    for (int i = 0; i < 9 ; i++)
+                    {
+                        possible.add(i);
+                    }
+
+                    int current = (int) (Math.random() * 9);
+                    possible.remove(current);
+                    code.add(current);
+
+                    for (int i = 1 ; i < 6 ; i++)
+                    {
+                        List<Integer> legalVals = new ArrayList<>(possible);
+                        if (current < 3 && !code.contains(current + 3))
+                        {
+                            legalVals.remove(Integer.valueOf(current + 6));
+                        }
+                        if (current > 5 && !code.contains(current - 3))
+                        {
+                            legalVals.remove(Integer.valueOf(current - 6));
+                        }
+                        if (current % 3 == 0 && !code.contains(current + 1))
+                        {
+                            legalVals.remove(Integer.valueOf(current + 2));
+                        }
+                        if (current % 3 == 2 && !code.contains(current - 1))
+                        {
+                            legalVals.remove(Integer.valueOf(current - 2));
+                        }
+
+                        current = legalVals.get((int) (Math.random() * legalVals.size()));
+                        code.add(current);
+                        possible.remove(Integer.valueOf(current));
+                        password[i] = Integer.valueOf(current).toString();
+                        labels[i] = "";
+                    }
                     break;
             }
 
