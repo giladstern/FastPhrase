@@ -70,6 +70,10 @@ public class TripleStoryFP extends FastPhrase {
 
     private static final float radiusRatio = 0.6f;
 
+    public TripleStoryFP(Context context)
+    {
+        this(context, null);
+    }
 
     public TripleStoryFP(final Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -219,7 +223,7 @@ public class TripleStoryFP extends FastPhrase {
                         middleOff = false;
                         if (v.getId() - 1 == topSelected)
                         {
-                            vibrator.vibrate(50);
+                            vibrator.vibrate(30);
                         }
                     }
 
@@ -294,7 +298,7 @@ public class TripleStoryFP extends FastPhrase {
                             bottomOff = false;
                             if (v.getId() - 1 == middleSelected)
                             {
-                                vibrator.vibrate(50);
+                                vibrator.vibrate(30);
                             }
                         }
 

@@ -39,4 +39,25 @@
         android:layout_alignRight="@+id/view2"
         android:layout_alignEnd="@+id/view2"
         android:onClick="storyOnClick" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pattern"
+        android:id="@+id/patternButton"
+        android:layout_below="@+id/listButton"
+        android:layout_alignRight="@+id/listButton"
+        android:layout_alignEnd="@+id/listButton"
+        android:layout_marginTop="49dp"
+        android:onClick="patternOnClick" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pin"
+        android:id="@+id/pinButton"
+        android:layout_alignTop="@+id/patternButton"
+        android:layout_alignLeft="@+id/storyButton"
+        android:layout_alignStart="@+id/storyButton"
+        android:onClick="pinOnClick" />
 </RelativeLayout>

@@ -20,6 +20,8 @@ public class MainActivity extends AppCompatActivity {
     // In lieu of enum for SharedPrefs, for now?
     static final int list = 0;
     static final int story = 1;
+    static final int pattern = 2;
+    static final int pin = 3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +66,12 @@ public class MainActivity extends AppCompatActivity {
             case story:
                 storyOnClick(null);
                 break;
+            case pattern:
+                patternOnClick(null);
+                break;
+            case pin:
+                pinOnClick(null);
+                break;
             case -1:
                 prefs.edit().putString("char0", "").commit();
         }
@@ -81,6 +89,22 @@ public class MainActivity extends AppCompatActivity {
     {
         getSharedPreferences(getString(R.string.filename), MODE_PRIVATE).edit().putInt(getString(R.string.pass_type), story).commit();
         Intent next = new Intent(this, StoryActivity.class);
+        startActivity(next);
+        finish();
+    }
+
+    public void patternOnClick(View v)
+    {
+        getSharedPreferences(getString(R.string.filename), MODE_PRIVATE).edit().putInt(getString(R.string.pass_type), pattern).commit();
+        Intent next = new Intent(this, PatternActivity.class);
+        startActivity(next);
+        finish();
+    }
+
+    public void pinOnClick(View v)
+    {
+        getSharedPreferences(getString(R.string.filename), MODE_PRIVATE).edit().putInt(getString(R.string.pass_type), pin).commit();
+        Intent next = new Intent(this, PinActivity.class);
         startActivity(next);
         finish();
     }

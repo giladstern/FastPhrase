@@ -1,6 +1,7 @@
 package com.example.gilad.fp;
 
 import android.app.ActionBar;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
@@ -9,6 +10,7 @@ import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.ContextThemeWrapper;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +22,10 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.locks.Lock;
+
+import haibison.android.lockpattern.util.ResourceUtils;
+import haibison.android.lockpattern.widget.LockPatternView;
 
 
 public class PassGenerate extends AppCompatActivity {
@@ -99,7 +105,7 @@ public class PassGenerate extends AppCompatActivity {
                         password[i] = Integer.valueOf(digit).toString();
                         labels[i] = "";
                     }
-                    for (int i = 5; i < 7 ; i++)
+                    for (int i = 4; i < 6 ; i++)
                     {
                         password[i] = "";
                         labels[i] = "";
@@ -117,6 +123,8 @@ public class PassGenerate extends AppCompatActivity {
                     int current = (int) (Math.random() * 9);
                     possible.remove(current);
                     code.add(current);
+                    password[0] = Integer.valueOf(current).toString();
+                    labels[0] = "";
 
                     for (int i = 1 ; i < 6 ; i++)
                     {
@@ -136,6 +144,25 @@ public class PassGenerate extends AppCompatActivity {
                         if (current % 3 == 2 && !code.contains(current - 1))
                         {
                             legalVals.remove(Integer.valueOf(current - 2));
+                        }
+                        if (!code.contains(4))
+                        {
+                            if (current == 0)
+                            {
+                                legalVals.remove(Integer.valueOf(8));
+                            }
+                            else if (current == 2)
+                            {
+                                legalVals.remove(Integer.valueOf(6));
+                            }
+                            else if (current == 6)
+                            {
+                                legalVals.remove(Integer.valueOf(2));
+                            }
+                            else if (current == 8)
+                            {
+                                legalVals.remove(Integer.valueOf(0));
+                            }
                         }
 
                         current = legalVals.get((int) (Math.random() * legalVals.size()));
@@ -264,6 +291,14 @@ public class PassGenerate extends AppCompatActivity {
                     }
                 }
                 break;
+            case PIN:
+                AutoResizeTextView textView = new AutoResizeTextView(this);
+                RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, (int) (200 * scale + 0.5f));
+                layoutParams.addRule(RelativeLayout.BELOW, findViewById(R.id.message).getId());
+                textView.setGravity(Gravity.CENTER);
+                textView.setText(password[0] + " " + password[1] + " " + password[2] + " " + password[3]);
+                layout.addView(textView, layoutParams);
+                break;
         }
 
         ViewTreeObserver vto = layout.getViewTreeObserver();
@@ -273,13 +308,11 @@ public class PassGenerate extends AppCompatActivity {
                 int width = layout.getMeasuredWidth() - layout.getPaddingLeft() - layout.getPaddingRight();
                 int height;
                 int widthUnit;
-                switch (type)
-                {
+                switch (type) {
                     case LIST:
                         height = (int) (75 * scale + 0.5f);
                         widthUnit = width / 2;
-                        for (int i = 0; i < 3 ; i++)
-                        {
+                        for (int i = 0; i < 3; i++) {
                             views[i * 2].getLayoutParams().height = height;
                             views[i * 2 + 1].getLayoutParams().height = (int) (height * 0.75);
                             views[i + 6].getLayoutParams().height = (int) (height * 0.25);
@@ -288,23 +321,20 @@ public class PassGenerate extends AppCompatActivity {
                             views[i + 6].getLayoutParams().width = widthUnit;
                         }
 
-                        for (int i = 0; i < 9 ; i ++)
-                        {
+                        for (int i = 0; i < 9; i++) {
                             ((AutoResizeTextView) views[i]).full();
                         }
                         break;
                     case TRIPLE_STORY:
                         height = (int) (100 * scale + 0.5f);
                         widthUnit = width / 8;
-                        for (int i = 0; i < 6 ; i ++)
-                        {
+                        for (int i = 0; i < 6; i++) {
                             views[i].getLayoutParams().height = (int) (height * 0.75f);
                             views[i + 6].getLayoutParams().height = (int) (height * 0.25f);
                             views[i].getLayoutParams().width = widthUnit * 2;
                             views[i + 6].getLayoutParams().width = widthUnit * 2;
                         }
-                        for (int i = 12; i < 16 ; i++)
-                        {
+                        for (int i = 12; i < 16; i++) {
                             views[i].getLayoutParams().height = height;
                             views[i].getLayoutParams().width = widthUnit;
                         }
@@ -312,6 +342,30 @@ public class PassGenerate extends AppCompatActivity {
                         ((RelativeLayout.LayoutParams) views[16].getLayoutParams()).width = ViewGroup.LayoutParams.MATCH_PARENT;
                         ((RelativeLayout.LayoutParams) views[16].getLayoutParams()).height = (int) (100 * scale + 0.5f);
                         views[16].setPadding(0, (int) (30 * scale + 0.5f), 0, (int) (30 * scale + 0.5f));
+                        break;
+                    case PATTERN:
+                        // Make new ContextThemeWrapper
+                        Context newContext = new ContextThemeWrapper(PassGenerate.this, R.style.Alp_42447968_Theme_Light);
+                        // Apply this resource
+                        final int resThemeResources = ResourceUtils.resolveAttribute(newContext, R.attr.alp_42447968_theme_resources);
+                        newContext.getTheme().applyStyle(resThemeResources, true);
+
+                        LockPatternView lockPatternView = new LockPatternView(newContext);
+
+                        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(layout.getWidth(), layout.getWidth());
+                        layoutParams.addRule(RelativeLayout.BELOW, findViewById(R.id.message).getId());
+
+                        layout.addView(lockPatternView, layoutParams);
+
+                        ArrayList<LockPatternView.Cell> pattern =  new ArrayList<>();
+                        for (int i = 0; i < 6 ; i++)
+                        {
+                            int pass = Integer.parseInt(password[i]);
+                            pattern.add(LockPatternView.Cell.of(pass));
+                        }
+
+                        lockPatternView.setPattern(LockPatternView.DisplayMode.Animate, pattern);
+                        lockPatternView.disableInput();
                         break;
                 }
             }

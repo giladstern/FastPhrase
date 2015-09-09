@@ -34,12 +34,12 @@ public class DispatchActivity extends AppCompatActivity {
         setContentView(R.layout.activity_dispatch);
         SharedPreferences preferences = getSharedPreferences(getString(R.string.stage_file), MODE_PRIVATE);
         int order = preferences.getInt(getString(R.string.order), -1);
-        int stage = preferences.getInt(getString(R.string.stage), 1);
+        int stage = preferences.getInt(getString(R.string.stage), 0);
         boolean second = preferences.getBoolean(getString(R.string.second), false);
         long alarmTime = preferences.getLong(getString(R.string.next_alarm), 0);
         Intent intent = null;
 
-        if (alarmTime > System.currentTimeMillis()) {
+        if (alarmTime > System.currentTimeMillis() || alarmTime == 0) {
 
             switch (order) {
                 case -1:
@@ -48,14 +48,14 @@ public class DispatchActivity extends AppCompatActivity {
                     preferences.edit().putInt(getString(R.string.order), order).commit();
                 case STORY_LIST:
                     if (!second) {
-                        if (stage != 1) {
+                        if (stage != 0) {
                             intent = new Intent(this, StoryActivity.class);
                         } else {
                             //TODO: change to tutorial intent.
                             intent = new Intent(this, StoryActivity.class);
                         }
                     } else {
-                        if (stage != 1) {
+                        if (stage != 0) {
                             intent = new Intent(this, ListActivity.class);
                         } else {
                             //TODO: change to tutorial intent.
@@ -65,14 +65,14 @@ public class DispatchActivity extends AppCompatActivity {
                     break;
                 case LIST_STORY:
                     if (second) {
-                        if (stage != 1) {
+                        if (stage != 0) {
                             intent = new Intent(this, StoryActivity.class);
                         } else {
                             //TODO: change to tutorial intent.
                             intent = new Intent(this, StoryActivity.class);
                         }
                     } else {
-                        if (stage != 1) {
+                        if (stage != 0) {
                             intent = new Intent(this, ListActivity.class);
                         } else {
                             //TODO: change to tutorial intent.
@@ -82,14 +82,14 @@ public class DispatchActivity extends AppCompatActivity {
                     break;
                 case STORY_PIN:
                     if (!second) {
-                        if (stage != 1) {
+                        if (stage != 0) {
                             intent = new Intent(this, StoryActivity.class);
                         } else {
                             //TODO: change to tutorial intent.
                             intent = new Intent(this, StoryActivity.class);
                         }
                     } else {
-                        if (stage != 1) {
+                        if (stage != 0) {
                             intent = new Intent(this, PinActivity.class);
                         } else {
                             //TODO: change to tutorial intent.
@@ -99,7 +99,7 @@ public class DispatchActivity extends AppCompatActivity {
                     break;
                 case PIN_STORY:
                     if (second) {
-                        if (stage != 1) {
+                        if (stage != 0) {
                             intent = new Intent(this, StoryActivity.class);
                         } else {
                             //TODO: change to tutorial intent.
@@ -108,7 +108,7 @@ public class DispatchActivity extends AppCompatActivity {
                     }
                     //TODO: change to pin.
                     else {
-                        if (stage != 1) {
+                        if (stage != 0) {
                             intent = new Intent(this, PinActivity.class);
                         } else {
                             //TODO: change to tutorial intent.
@@ -118,7 +118,7 @@ public class DispatchActivity extends AppCompatActivity {
                     break;
                 case STORY_PATTERN:
                     if (!second) {
-                        if (stage != 1) {
+                        if (stage != 0) {
                             intent = new Intent(this, StoryActivity.class);
                         } else {
                             //TODO: change to tutorial intent.
@@ -126,7 +126,7 @@ public class DispatchActivity extends AppCompatActivity {
                         }
                     } else {
                         //TODO: change to pattern
-                        if (stage != 1) {
+                        if (stage != 0) {
                             intent = new Intent(this, PatternActivity.class);
                         } else {
                             //TODO: change to tutorial intent.
@@ -136,7 +136,7 @@ public class DispatchActivity extends AppCompatActivity {
                     break;
                 case PATTERN_STORY:
                     if (second) {
-                        if (stage != 1) {
+                        if (stage != 0) {
                             intent = new Intent(this, StoryActivity.class);
                         } else {
                             //TODO: change to tutorial intent.
@@ -144,7 +144,7 @@ public class DispatchActivity extends AppCompatActivity {
                         }
                     } else {
                         //TODO: change to pattern
-                        if (stage != 1) {
+                        if (stage != 0) {
                             intent = new Intent(this, PatternActivity.class);
                         } else {
                             //TODO: change to tutorial intent.
@@ -154,7 +154,7 @@ public class DispatchActivity extends AppCompatActivity {
                     break;
                 case LIST_PIN:
                     if (!second) {
-                        if (stage != 1) {
+                        if (stage != 0) {
                             intent = new Intent(this, ListActivity.class);
                         } else {
                             //TODO: change to tutorial intent.
@@ -162,7 +162,7 @@ public class DispatchActivity extends AppCompatActivity {
                         }
                     } else {
                         //TODO: change to pin
-                        if (stage != 1) {
+                        if (stage != 0) {
                             intent = new Intent(this, PinActivity.class);
                         } else {
                             //TODO: change to tutorial intent.
@@ -172,7 +172,7 @@ public class DispatchActivity extends AppCompatActivity {
                     break;
                 case PIN_LIST:
                     if (second) {
-                        if (stage != 1) {
+                        if (stage != 0) {
                             intent = new Intent(this, ListActivity.class);
                         } else {
                             //TODO: change to tutorial intent.
@@ -180,7 +180,7 @@ public class DispatchActivity extends AppCompatActivity {
                         }
                     } else {
                         //TODO: change to pin
-                        if (stage != 1) {
+                        if (stage != 0) {
                             intent = new Intent(this, PinActivity.class);
                         } else {
                             //TODO: change to tutorial intent.
@@ -190,7 +190,7 @@ public class DispatchActivity extends AppCompatActivity {
                     break;
                 case LIST_PATTERN:
                     if (!second) {
-                        if (stage != 1) {
+                        if (stage != 0) {
                             intent = new Intent(this, ListActivity.class);
                         } else {
                             //TODO: change to tutorial intent.
@@ -198,7 +198,7 @@ public class DispatchActivity extends AppCompatActivity {
                         }
                     } else {
                         //TODO: change to pattern
-                        if (stage != 1) {
+                        if (stage != 0) {
                             intent = new Intent(this, PatternActivity.class);
                         } else {
                             //TODO: change to tutorial intent.
@@ -208,7 +208,7 @@ public class DispatchActivity extends AppCompatActivity {
                     break;
                 case PATTERN_LIST:
                     if (second) {
-                        if (stage != 1) {
+                        if (stage != 0) {
                             intent = new Intent(this, ListActivity.class);
                         } else {
                             //TODO: change to tutorial intent.
@@ -216,7 +216,7 @@ public class DispatchActivity extends AppCompatActivity {
                         }
                     } else {
                         //TODO: change to pattern
-                        if (stage != 1) {
+                        if (stage != 0) {
                             intent = new Intent(this, PatternActivity.class);
                         } else {
                             //TODO: change to tutorial intent.

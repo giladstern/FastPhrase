@@ -16,6 +16,8 @@ public class StoryActivity extends AppCompatActivity {
     FastPhrase FP;
     String[] password = new String[6];
     MainActivity.Types type;
+    int stage;
+    int timesLeft;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +30,8 @@ public class StoryActivity extends AppCompatActivity {
 
         FP = (TripleStoryFP) findViewById(R.id.story_fp);
         type = MainActivity.Types.TRIPLE_STORY;
+        stage = getIntent().getIntExtra("stage", 0);
+        timesLeft = DispatchActivity.ITERATIONS[stage];
 
         findViewById(R.id.reset).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -40,7 +44,7 @@ public class StoryActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 getSharedPreferences(getString(R.string.filename), MODE_PRIVATE).edit().putInt(getString(R.string.pass_type), -1).commit();
-                Intent next = new Intent(StoryActivity.this, MainActivity.class);
+                Intent next = new Intent(v.getContext(), MainActivity.class);
                 startActivity(next);
                 finish();
             }
@@ -69,6 +73,7 @@ public class StoryActivity extends AppCompatActivity {
             @Override
             public void onComplete(String[] pass, ArrayList<TouchData> touchLog) {
 //                FP.reset();
+                timesLeft--;
                 Intent next = new Intent(FP.getContext(), SuccMsg.class);
                 next.putExtra("type", type);
                 boolean equal = true;
@@ -89,6 +94,7 @@ public class StoryActivity extends AppCompatActivity {
                 next.putExtra("time", touchLog.get(touchLog.size() - 1).time - touchLog.get(0).time);
 
                 startActivity(next);
+
             }
         });
 

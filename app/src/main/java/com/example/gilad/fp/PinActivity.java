@@ -1,16 +1,51 @@
 package com.example.gilad.fp;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+
+import java.util.ArrayList;
 
 public class PinActivity extends AppCompatActivity {
+
+    MainActivity.Types type = MainActivity.Types.PIN;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pin);
+
+        findViewById(R.id.change_type).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getSharedPreferences(getString(R.string.filename), MODE_PRIVATE).edit().putInt(getString(R.string.pass_type), -1).commit();
+                Intent next = new Intent(PinActivity.this, MainActivity.class);
+                startActivity(next);
+                finish();
+            }
+        });
+
+        findViewById(R.id.new_pass).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getSharedPreferences(getString(R.string.filename), MODE_PRIVATE).edit().putString("char0", "").commit();
+                Intent next = new Intent(PinActivity.this, PassGenerate.class);
+                next.putExtra("type", type);
+                startActivity(next);
+            }
+        });
+
+        findViewById(R.id.forgot).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent next = new Intent(PinActivity.this, PassGenerate.class);
+                next.putExtra("type", type);
+                startActivity(next);
+            }
+        });
     }
 
     @Override
