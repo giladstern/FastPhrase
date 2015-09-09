@@ -25,6 +25,8 @@ public class PatternActivity extends AppCompatActivity {
     String[] password = new String[6];
     MainActivity.Types type;
     ArrayList<TouchData> touchLog = new ArrayList<>();
+    int stage;
+    int timesLeft;
 
     static final int START = 0;
     static final int ADD = 1;
@@ -36,6 +38,8 @@ public class PatternActivity extends AppCompatActivity {
         setContentView(R.layout.activity_pattern);
 
         type = MainActivity.Types.PATTERN;
+        stage = getIntent().getIntExtra("stage", 0);
+        timesLeft = DispatchActivity.ITERATIONS[stage];
 
         // Make new ContextThemeWrapper
         Context newContext = new ContextThemeWrapper(this, R.style.Alp_42447968_Theme_Light);
@@ -79,6 +83,7 @@ public class PatternActivity extends AppCompatActivity {
 
             @Override
             public void onPatternDetected(List<LockPatternView.Cell> list) {
+                timesLeft--;
                 touchLog.add(new TouchData(System.currentTimeMillis(), FINISH, -1, ""));
                 Intent next = new Intent(lockPatternView.getContext(), SuccMsg.class);
                 next.putExtra("type", type);
@@ -104,8 +109,6 @@ public class PatternActivity extends AppCompatActivity {
                 next.putExtra("time", touchLog.get(touchLog.size() - 1).time - touchLog.get(0).time);
 
                 startActivity(next);
-
-                lockPatternView.clearPattern();
             }
         });
 
@@ -164,18 +167,24 @@ public class PatternActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        SharedPreferences prefs = getSharedPreferences(getString(R.string.filename), MODE_PRIVATE);
-        for (int i = 0; i < 6 ; i++)
-        {
-            password[i] = prefs.getString(String.format("char%d", i), "");
+        if (timesLeft != 0) {
+            SharedPreferences prefs = getSharedPreferences(getString(R.string.filename), MODE_PRIVATE);
+            for (int i = 0; i < 6; i++) {
+                password[i] = prefs.getString(String.format("char%d", i), "");
+            }
+            if (password[0].equals("")) {
+                Intent next = new Intent(this, PassGenerate.class);
+                next.putExtra("type", type);
+                startActivity(next);
+            }
+            lockPatternView.clearPattern();
         }
-        if (password[0].equals(""))
+        else
         {
-            Intent next = new Intent(this, PassGenerate.class);
-            next.putExtra("type", type);
-            startActivity(next);
+            Intent intent = new Intent(this, AlarmSetActivity.class);
+            intent.putExtra("stage", stage);
+            startActivity(intent);
+            finish();
         }
-        lockPatternView.clearPattern();
-        touchLog.clear();
     }
 }

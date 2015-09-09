@@ -125,17 +125,24 @@ public class StoryActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        SharedPreferences prefs = getSharedPreferences(getString(R.string.filename), MODE_PRIVATE);
-        for (int i = 0; i < 6 ; i++)
-        {
-            password[i] = prefs.getString(String.format("char%d", i), "");
+        if (timesLeft != 0) {
+            SharedPreferences prefs = getSharedPreferences(getString(R.string.filename), MODE_PRIVATE);
+            for (int i = 0; i < 6; i++) {
+                password[i] = prefs.getString(String.format("char%d", i), "");
+            }
+            if (password[0].equals("")) {
+                Intent next = new Intent(this, PassGenerate.class);
+                next.putExtra("type", type);
+                startActivity(next);
+            }
+            FP.reset();
         }
-        if (password[0].equals(""))
+        else
         {
-            Intent next = new Intent(this, PassGenerate.class);
-            next.putExtra("type", type);
-            startActivity(next);
+            Intent intent = new Intent(this, AlarmSetActivity.class);
+            intent.putExtra("stage", stage);
+            startActivity(intent);
+            finish();
         }
-        FP.reset();
     }
 }

@@ -37,9 +37,14 @@ public class DispatchActivity extends AppCompatActivity {
         int stage = preferences.getInt(getString(R.string.stage), 0);
         boolean second = preferences.getBoolean(getString(R.string.second), false);
         long alarmTime = preferences.getLong(getString(R.string.next_alarm), 0);
+        
         Intent intent = null;
+        if (stage == 0)
+        {
+            getSharedPreferences(getString(R.string.filename), MODE_PRIVATE).edit().putString("char0", "").commit();
+        }
 
-        if (alarmTime > System.currentTimeMillis() || alarmTime == 0) {
+        if (alarmTime < System.currentTimeMillis()) {
 
             switch (order) {
                 case -1:
@@ -226,6 +231,8 @@ public class DispatchActivity extends AppCompatActivity {
                     break;
             }
 
+            intent = new Intent(this, StoryActivity.class);
+
             if (intent != null) {
                 intent.putExtra(getString(R.string.stage), stage);
                 startActivity(intent);
@@ -265,8 +272,8 @@ public class DispatchActivity extends AppCompatActivity {
                 dayString += "s";
             }
 
-            String message = String.format("It is not time yet.\nYou have %l" + dayString + ", %l " +
-                    hourString + " and %l " + minuteString + " left until your next usage.", days, hours, minutes);
+            String message = String.format("It is not time yet.\nYou have:\n%d " + dayString + ", %d " +
+                    hourString + " and %d " + minuteString + "\nleft until your next usage.", days, hours, minutes);
 
             ((TextView) findViewById(R.id.message)).setText(message);
         }

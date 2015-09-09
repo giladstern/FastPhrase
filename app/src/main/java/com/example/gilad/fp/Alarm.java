@@ -53,7 +53,7 @@ public class Alarm extends WakefulBroadcastReceiver
         }
     }
 
-    public void SetAlarm(Context context, long time)
+    static public void set(Context context, long time)
     {
         SharedPreferences sharedPreferences = context.getSharedPreferences("times", Context.MODE_PRIVATE);
         AlarmManager am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
@@ -64,7 +64,7 @@ public class Alarm extends WakefulBroadcastReceiver
         am.set(AlarmManager.RTC_WAKEUP, time, pi);
     }
 
-    public void CancelAlarm(Context context)
+    static public void cancel(Context context)
     {
         Intent intent = new Intent(context, Alarm.class);
         PendingIntent sender = PendingIntent.getBroadcast(context, 0, intent, 0);

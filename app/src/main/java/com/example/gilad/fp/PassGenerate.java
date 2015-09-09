@@ -350,7 +350,7 @@ public class PassGenerate extends AppCompatActivity {
                         final int resThemeResources = ResourceUtils.resolveAttribute(newContext, R.attr.alp_42447968_theme_resources);
                         newContext.getTheme().applyStyle(resThemeResources, true);
 
-                        LockPatternView lockPatternView = new LockPatternView(newContext);
+                        final LockPatternView lockPatternView = new LockPatternView(newContext);
 
                         RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(layout.getWidth(), layout.getWidth());
                         layoutParams.addRule(RelativeLayout.BELOW, findViewById(R.id.message).getId());

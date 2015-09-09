@@ -128,4 +128,5 @@
     <string name="title_activity_dispatch">Fast Phrase</string>
     <string name="title_activity_pattern">Fast Phrase</string>
     <string name="title_activity_pin">Fast Phrase</string>
+    <string name="title_activity_alarm_set">AlarmSetActivity</string>
 </resources>
