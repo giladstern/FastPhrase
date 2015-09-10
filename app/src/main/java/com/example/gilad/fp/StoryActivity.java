@@ -26,7 +26,7 @@ public class StoryActivity extends AppCompatActivity {
 
 //        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN);
 
-        FP = (TripleStoryFP) findViewById(R.id.story_fp);
+        FP = (DiagonalStoryFP) findViewById(R.id.story_fp);
         type = MainActivity.Types.TRIPLE_STORY;
 
         findViewById(R.id.reset).setOnClickListener(new View.OnClickListener() {
