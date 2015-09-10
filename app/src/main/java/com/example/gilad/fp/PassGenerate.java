@@ -37,6 +37,7 @@ public class PassGenerate extends AppCompatActivity {
     TextView views[];
     MainActivity.Types type;
     float scale;
+    LockPatternView lockPatternView = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -299,6 +300,30 @@ public class PassGenerate extends AppCompatActivity {
                 textView.setText(password[0] + " " + password[1] + " " + password[2] + " " + password[3]);
                 layout.addView(textView, layoutParams);
                 break;
+
+            case PATTERN:
+                // Make new ContextThemeWrapper
+                Context newContext = new ContextThemeWrapper(PassGenerate.this, R.style.Alp_42447968_Theme_Light);
+                // Apply this resource
+                final int resThemeResources = ResourceUtils.resolveAttribute(newContext, R.attr.alp_42447968_theme_resources);
+                newContext.getTheme().applyStyle(resThemeResources, true);
+
+                lockPatternView = new LockPatternView(newContext);
+
+                layoutParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+                layoutParams.addRule(RelativeLayout.BELOW, findViewById(R.id.message).getId());
+
+                layout.addView(lockPatternView, layoutParams);
+
+                ArrayList<LockPatternView.Cell> pattern =  new ArrayList<>();
+                for (int i = 0; i < 6 ; i++)
+                {
+                    int pass = Integer.parseInt(password[i]);
+                    pattern.add(LockPatternView.Cell.of(pass));
+                }
+                lockPatternView.setPattern(LockPatternView.DisplayMode.Animate, pattern);
+                lockPatternView.disableInput();
+                break;
         }
 
         ViewTreeObserver vto = layout.getViewTreeObserver();
@@ -344,28 +369,8 @@ public class PassGenerate extends AppCompatActivity {
                         views[16].setPadding(0, (int) (30 * scale + 0.5f), 0, (int) (30 * scale + 0.5f));
                         break;
                     case PATTERN:
-                        // Make new ContextThemeWrapper
-                        Context newContext = new ContextThemeWrapper(PassGenerate.this, R.style.Alp_42447968_Theme_Light);
-                        // Apply this resource
-                        final int resThemeResources = ResourceUtils.resolveAttribute(newContext, R.attr.alp_42447968_theme_resources);
-                        newContext.getTheme().applyStyle(resThemeResources, true);
-
-                        final LockPatternView lockPatternView = new LockPatternView(newContext);
-
-                        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(layout.getWidth(), layout.getWidth());
-                        layoutParams.addRule(RelativeLayout.BELOW, findViewById(R.id.message).getId());
-
-                        layout.addView(lockPatternView, layoutParams);
-
-                        ArrayList<LockPatternView.Cell> pattern =  new ArrayList<>();
-                        for (int i = 0; i < 6 ; i++)
-                        {
-                            int pass = Integer.parseInt(password[i]);
-                            pattern.add(LockPatternView.Cell.of(pass));
-                        }
-
-                        lockPatternView.setPattern(LockPatternView.DisplayMode.Animate, pattern);
-                        lockPatternView.disableInput();
+                        lockPatternView.getLayoutParams().height = layout.getWidth();
+                        lockPatternView.getLayoutParams().width = layout.getHeight();
                         break;
                 }
             }
