@@ -661,5 +661,11 @@ public class DiagonalStoryFP extends FastPhrase {
         float yDist = ev.getY() - yCenter;
 
         return xDist * xDist + yDist * yDist < radius * radius;
+
+//        int height = v.getHeight() + getChildAt(v.getId() + 14).getHeight();
+//        int yCenter = (v.getTop() + getChildAt(v.getId() + 14).getBottom()) / 2;
+//
+//        return yCenter - ev.getY() < height * 0.2 && ev.getY() - yCenter < height * 0.2;
     }
+
 }
