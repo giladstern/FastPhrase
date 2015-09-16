@@ -102,7 +102,6 @@ public class PatternActivity extends AppCompatActivity {
                 }
 
                 next.putExtra("time", touchLog.get(touchLog.size() - 1).time - touchLog.get(0).time);
-                touchLog.clear();
 
                 startActivity(next);
             }

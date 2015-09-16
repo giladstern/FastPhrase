@@ -106,20 +106,11 @@ public class PassGenerate extends AppCompatActivity {
                         password[i] = Integer.valueOf(digit).toString();
                         labels[i] = "";
                     }
-
-                    if (Math.random() < 0.5f)
+                    for (int i = 4; i < 6 ; i++)
                     {
-                        password[4] = "*";
+                        password[i] = "";
+                        labels[i] = "";
                     }
-
-                    else
-                    {
-                        password[4] = "#";
-                    }
-
-                    password[5] = "";
-                    labels[4] = "";
-                    labels[5] = "";
                     break;
                 case PATTERN:
                     List<Integer> possible = new ArrayList<>();
@@ -306,7 +297,7 @@ public class PassGenerate extends AppCompatActivity {
                 RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, (int) (200 * scale + 0.5f));
                 layoutParams.addRule(RelativeLayout.BELOW, findViewById(R.id.message).getId());
                 textView.setGravity(Gravity.CENTER);
-                textView.setText(password[0] + " " + password[1] + " " + password[2] + " " + password[3] + " " + password[4]);
+                textView.setText(password[0] + " " + password[1] + " " + password[2] + " " + password[3]);
                 layout.addView(textView, layoutParams);
                 break;
 
