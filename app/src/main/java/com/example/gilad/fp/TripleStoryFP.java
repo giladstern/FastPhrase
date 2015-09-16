@@ -70,6 +70,7 @@ public class TripleStoryFP extends FastPhrase {
 
     private static final float radiusRatio = 0.6f;
 
+
     public TripleStoryFP(Context context)
     {
         this(context, null);

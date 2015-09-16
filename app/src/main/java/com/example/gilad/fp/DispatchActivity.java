@@ -111,7 +111,6 @@ public class DispatchActivity extends AppCompatActivity {
                             intent = new Intent(this, StoryActivity.class);
                         }
                     }
-                    //TODO: change to pin.
                     else {
                         if (stage != 0) {
                             intent = new Intent(this, PinActivity.class);
@@ -130,7 +129,6 @@ public class DispatchActivity extends AppCompatActivity {
                             intent = new Intent(this, StoryActivity.class);
                         }
                     } else {
-                        //TODO: change to pattern
                         if (stage != 0) {
                             intent = new Intent(this, PatternActivity.class);
                         } else {
@@ -148,7 +146,6 @@ public class DispatchActivity extends AppCompatActivity {
                             intent = new Intent(this, StoryActivity.class);
                         }
                     } else {
-                        //TODO: change to pattern
                         if (stage != 0) {
                             intent = new Intent(this, PatternActivity.class);
                         } else {
@@ -166,7 +163,6 @@ public class DispatchActivity extends AppCompatActivity {
                             intent = new Intent(this, ListActivity.class);
                         }
                     } else {
-                        //TODO: change to pin
                         if (stage != 0) {
                             intent = new Intent(this, PinActivity.class);
                         } else {
@@ -184,7 +180,6 @@ public class DispatchActivity extends AppCompatActivity {
                             intent = new Intent(this, ListActivity.class);
                         }
                     } else {
-                        //TODO: change to pin
                         if (stage != 0) {
                             intent = new Intent(this, PinActivity.class);
                         } else {
@@ -202,7 +197,6 @@ public class DispatchActivity extends AppCompatActivity {
                             intent = new Intent(this, ListActivity.class);
                         }
                     } else {
-                        //TODO: change to pattern
                         if (stage != 0) {
                             intent = new Intent(this, PatternActivity.class);
                         } else {
@@ -220,7 +214,7 @@ public class DispatchActivity extends AppCompatActivity {
                             intent = new Intent(this, ListActivity.class);
                         }
                     } else {
-                        //TODO: change to pattern
+
                         if (stage != 0) {
                             intent = new Intent(this, PatternActivity.class);
                         } else {
